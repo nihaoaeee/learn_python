@@ -46,6 +46,31 @@ class Vector:
             msg = '{cls.__name__} indices must be integers'
             raise TypeError(msg.format(cls=cls))
 
+    short_name = 'xyzt'
+
+    def __getattr__(self, name):
+        cls = type(self)
+        if len(name) == 1:
+            pos = cls.short_name.find(name)
+            if 0 <= pos < len(self._components):
+                return self._components[pos]
+        msg = '{.__name__!r} object has no attribute {!r}'
+        raise AttributeError(msg.format(cls, name))
+
+    def __setattr__(self, key, value):
+        cls = type(self)
+        if len(key) == 1:
+            if key in cls.short_name:
+                error = 'readonly attribute (attr_name!r}'
+            elif key.islower():
+                error = "can't set attribute 'a' to 'z' in (attr_name!r}"
+            else:
+                error = ''
+            if error:
+                msg = error.format(cls_name=cls.__name__, attr_name=key)
+                raise AttributeError(msg)
+            super().__setattr__(key, value)
+
     @classmethod
     def frombytes(cls, octets):
         typecode = chr(octets[0])
