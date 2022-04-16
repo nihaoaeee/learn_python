@@ -1,4 +1,5 @@
 import math
+import numbers
 import reprlib
 from array import array
 
@@ -32,8 +33,30 @@ class Vector:
     def __bool__(self):
         return bool(abs(self))
 
+    def __len__(self):
+        return len(self._components)
+
+    def __getitem__(self, index):
+        cls = type(self)
+        if isinstance(index, slice):
+            return cls(self._components[index])
+        elif isinstance(index, numbers.Integral):
+            return self._components[index]
+        else:
+            msg = '{cls.__name__} indices must be integers'
+            raise TypeError(msg.format(cls=cls))
+
     @classmethod
     def frombytes(cls, octets):
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
+
+
+if __name__ == "__main__":
+    v1 = Vector([3, 4, 5])
+    print(len(v1))
+    print(v1[0], v1[1])
+    v7 = Vector(range(7))
+    print(v7[1:4])
+    v7[1, 2]
