@@ -36,6 +36,7 @@ class Vector:
     def __len__(self):
         return len(self._components)
 
+
     def __getitem__(self, index):
         cls = type(self)
         if isinstance(index, slice):
