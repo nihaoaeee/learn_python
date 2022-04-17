@@ -1,5 +1,7 @@
+import functools
 import math
 import numbers
+import operator
 import reprlib
 from array import array
 
@@ -25,7 +27,17 @@ class Vector:
         return bytes([ord(self.typecode)]) + bytes(self._components)
 
     def __eq__(self, other):
-        return tuple(self) == tuple(other)
+        # return len(self) == len(other) and all(a == b for a, b in zip(self, other))
+        if len(self) != len(other):
+            return False
+        for a, b in zip(self, other):
+            if a != b:
+                return False
+        return True
+
+    def __hash__(self):
+        hashes = (hash(x) for x in self._components)
+        return functools.reduce(operator.xor, hashes, 0)
 
     def __abs__(self):
         return math.sqrt(sum(x * x for x in self))
