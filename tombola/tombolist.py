@@ -22,3 +22,4 @@ class TomboList(list):
 
 if __name__ == "__main__":
     print(issubclass(TomboList, Tombola))
+    print(TomboList.__mro__)

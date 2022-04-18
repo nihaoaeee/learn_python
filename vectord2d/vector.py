@@ -1,4 +1,5 @@
 import functools
+import itertools
 import math
 import numbers
 import operator
@@ -88,6 +89,40 @@ class Vector:
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
+
+    def __neg__(self):
+        return Vector(-x for x in self)
+
+    def __pos__(self):
+        return Vector(self)
+
+    def __add__(self, other):
+        try:
+            pairs = itertools.zip_longest(self, other, fillvalue=0.0)
+            return Vector(a + b for a, b in pairs)
+        except TypeError:
+            return NotImplemented
+
+    def __radd__(self, other):
+        return self + other
+
+    def __mul__(self, other):
+        if isinstance(other, numbers.Real):
+            return Vector(n * other for n in self)
+        else:
+            return NotImplemented
+
+    def __rmul__(self, other):
+        return self * other
+
+    def __matmul__(self, other):
+        try:
+            return sum(a * b for a, b in zip(self, other))
+        except TypeError:
+            return NotImplemented
+
+    def __rmatmul__(self, other):
+        return self * other
 
 
 if __name__ == "__main__":
