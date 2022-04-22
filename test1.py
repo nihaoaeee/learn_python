@@ -1,3 +1,5 @@
+import time
+
 import testdescriptot
 import os
 
@@ -20,13 +22,18 @@ def testfile():
 # class Test:
 
 if __name__ == "__main__":
-    try:
-        testfile()
-        print(1)
-        print(os.name)
-        print(os.linesep)
-        print(os.sep)
-        print(os.getcwd())
-        assert 1 == 2, "1!=2"
-    except AssertionError as e:
-        print(e)
+    # try:
+    #     testfile()
+    #     print(1)
+    #     print(os.name)
+    #     print(os.linesep)
+    #     print(os.sep)
+    #     print(os.getcwd())
+    #     assert 1 == 2, "1!=2"
+    # except AssertionError as e:
+    #     print(e)
+
+    from tqdm import tqdm
+
+    for i in tqdm(range(1000)):
+        time.sleep(0.001)
