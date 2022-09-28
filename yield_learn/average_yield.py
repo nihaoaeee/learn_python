@@ -10,14 +10,13 @@ def average_yield():
     count = 0
     average = None
     while True:
-        trem = yield average
+        term = yield average
         count += 1
-        total += trem
+        total += term
         average = total / count
 
-coro_average = average_yield()
-next(coro_average)
-for i_ in range(5):
-    res = coro_average.send(5*i_)
-    print(res)
 
+coro_average = average_yield()
+for i_ in range(5):
+    res = coro_average.send(5 * i_)
+    print(res)
