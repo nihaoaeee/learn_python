@@ -1,8 +1,3 @@
-import time
-
-import testdescriptot
-import os
-
 
 def demo(obj=None):
     if obj == None:
@@ -33,7 +28,11 @@ if __name__ == "__main__":
     # except AssertionError as e:
     #     print(e)
 
-    from tqdm import tqdm
+    # from tqdm import tqdm
 
-    for i in tqdm(range(1000)):
-        time.sleep(0.001)
+    # for i in tqdm(range(1000)):
+    #     time.sleep(0.001)
+        
+    base_id = [1,2]
+    if 3 not in base_id:
+        print(1)
