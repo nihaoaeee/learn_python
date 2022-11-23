@@ -1,4 +1,3 @@
-
 def demo(obj=None):
     if obj == None:
         obj = []
@@ -32,7 +31,15 @@ if __name__ == "__main__":
 
     # for i in tqdm(range(1000)):
     #     time.sleep(0.001)
-        
-    base_id = [1,2]
-    if 3 not in base_id:
-        print(1)
+
+    # base_id = [1,2]
+    # if 3 not in base_id:
+    #     print(1)
+    import random
+
+    print(round(5*random.uniform(1, 1.5)))
+
+    a = [1] * 3
+    a += [0]
+    random.shuffle(a)
+    print(a)
