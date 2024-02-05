@@ -20,5 +20,6 @@ while len(result) < 30:
         if num not in result[-5:]:
             result.append(num)
 
+
 # 输出结果列表
 print(result)
